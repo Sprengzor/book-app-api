@@ -1,14 +1,20 @@
-import express from 'express'
-import bodyParser from 'body-parser'
+import express from "express";
+import bodyParser from "body-parser";
 
-const app = express()
-const BASE_URI = '/api/v1'
+import authorRoutes from "./routes/AuthorRoutes";
+import bookRoutes from "./routes/BookRoutes";
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+const app = express();
+const BASE_URI = "/api/v1";
 
-app.get('*', (req, res) => {
-  res.status(200).send({messsage: 'Welcome to this API'})
-})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-export default app
+app.use(BASE_URI, authorRoutes);
+app.use(BASE_URI,bookRoutes);
+
+app.get("*", (req, res) => {
+  res.status(200).send({ messsage: "Welcome to this API" });
+});
+
+export default app;
